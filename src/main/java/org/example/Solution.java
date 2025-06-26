@@ -1,23 +1,14 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class Solution {
-    public int solution(int left, int right) {
-        int answer = 0;
-        for (int i = left; i <= right; i++) {
-            int count = 0;
+    public String solution(String s) {
+        char[] chars = s.toCharArray();
 
-            for (int j = 1; j <= i; j++) {
-                if (i % j == 0) {
-                    count++;
-                }
-            }
+        Arrays.sort(chars);
+        StringBuilder sb = new StringBuilder(new String(chars));
 
-            if (count % 2 == 0) {
-                answer += i;
-            } else {
-                answer -= i;
-            }
-        }
-        return answer;
+        return sb.reverse().toString();
     }
 }
