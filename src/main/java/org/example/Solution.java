@@ -3,12 +3,10 @@ package org.example;
 import java.util.Arrays;
 
 public class Solution {
-    public String solution(String s) {
-        char[] chars = s.toCharArray();
+    public long solution(int price, int money, int count) {
+        long totalCost = (long) price * count * (count + 1) / 2;
+        long shortfall = totalCost - money;
 
-        Arrays.sort(chars);
-        StringBuilder sb = new StringBuilder(new String(chars));
-
-        return sb.reverse().toString();
+        return shortfall > 0 ? shortfall : 0;
     }
 }
