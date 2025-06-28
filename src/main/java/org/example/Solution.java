@@ -1,12 +1,18 @@
 package org.example;
 
-import java.util.Arrays;
 
 public class Solution {
-    public long solution(int price, int money, int count) {
-        long totalCost = (long) price * count * (count + 1) / 2;
-        long shortfall = totalCost - money;
+    public boolean solution(String s) {
+        if (s.length() != 4 && s.length() != 6) {
+            return false;
+        }
 
-        return shortfall > 0 ? shortfall : 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (!Character.isDigit(s.charAt(i))) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
