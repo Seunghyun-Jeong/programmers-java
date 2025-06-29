@@ -2,17 +2,18 @@ package org.example;
 
 
 public class Solution {
-    public boolean solution(String s) {
-        if (s.length() != 4 && s.length() != 6) {
-            return false;
-        }
+    public int[][] solution(int[][] arr1, int[][] arr2) {
+        int row = arr1.length;
+        int col = arr1[0].length;
 
-        for (int i = 0; i < s.length(); i++) {
-            if (!Character.isDigit(s.charAt(i))) {
-                return false;
+        int[][] result = new int[row][col];
+
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                result[i][j] = arr1[i][j] + arr2[i][j];
             }
         }
 
-        return true;
+        return result;
     }
 }
