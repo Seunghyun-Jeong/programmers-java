@@ -1,35 +1,38 @@
 package org.example;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Solution {
-    public int[] solution(int []arr) {
-        ArrayList<Integer> answerList = new ArrayList<>();
 
-        if (arr.length > 0) {
-            answerList.add(arr[0]);
+    public int getGCD(int a, int b) {
+        while (b != 0) {
+            int temp = a % b;
+            a = b;
+            b = temp;
         }
-
-        for (int i = 1; i < arr.length; i++) {
-            if (arr[i] != answerList.get(answerList.size() - 1)) {
-                answerList.add(arr[i]);
-            }
-        }
-
-        return answerList.stream()
-                .mapToInt(Integer::intValue)
-                .toArray();
+        return a;
     }
+
+    public int[] solution(int n, int m) {
+        int[] answer = new int[2];
+
+        answer[0] = getGCD(n, m);
+        answer[1] = (n / answer[0]) * m;
+
+        return answer;
+    }
+
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        int[] arr1 = {1, 1, 3, 3, 0, 1, 1};
-        int[] result1 = sol.solution(arr1);
+        int n1 = 3;
+        int m1 = 12;
+        int[] result1 = sol.solution(n1, m1);
         System.out.println(Arrays.toString(result1));
 
-        int[] arr2 = {4, 4, 4, 3, 3};
-        int[] result2 = sol.solution(arr2);
+        int n2 = 2;
+        int m2 = 5;
+        int[] result2 = sol.solution(n2, m2);
         System.out.println(Arrays.toString(result2));
     }
 }
