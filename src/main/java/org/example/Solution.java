@@ -1,38 +1,39 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 public class Solution {
-    public int[] solution(String s) {
-        int[] answer = new int[s.length()];
+    public String solution(String s, int n) {
+        StringBuilder sb = new StringBuilder();
 
-        HashMap<Character, Integer> lastSeen = new HashMap<>();
-
-        for (int i = 0; i < s.length(); i++) {
-            char currentChar = s.charAt(i);
-
-            if (lastSeen.containsKey(currentChar)) {
-                answer[i] = i - lastSeen.get(currentChar);
+        for (char ch : s.toCharArray()) {
+            if (ch == ' ') {
+                sb.append(' ');
+            } else if (Character.isUpperCase(ch)) {
+                char newChar = (char) (((ch - 'A' + n) % 26) + 'A');
+                sb.append(newChar);
             } else {
-                answer[i] = -1;
+                char newChar = (char) (((ch - 'a' + n) % 26) + 'a');
+                sb.append(newChar);
             }
-
-            lastSeen.put(currentChar, i);
         }
-
-        return answer;
+        return sb.toString();
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        String s1 = "banana";
-        int[] result1 = sol.solution(s1);
-        System.out.println(Arrays.toString(result1));
+        String s1 = "AB";
+        int n1 = 1;
+        String result1 = sol.solution(s1, n1);
+        System.out.println(result1);
 
-        String s2 = "foobar";
-        int[] result2 = sol.solution(s2);
-        System.out.println(Arrays.toString(result2));
+        String s2 = "z";
+        int n2 = 1;
+        String result2 = sol.solution(s2, n2);
+        System.out.println(result2);
+
+        String s3 = "a B z";
+        int n3 = 4;
+        String result3 = sol.solution(s3, n3);
+        System.out.println(result3);
     }
 }
