@@ -1,39 +1,42 @@
 package org.example;
 
-public class Solution {
-    public String solution(String s, int n) {
-        StringBuilder sb = new StringBuilder();
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
-        for (char ch : s.toCharArray()) {
-            if (ch == ' ') {
-                sb.append(' ');
-            } else if (Character.isUpperCase(ch)) {
-                char newChar = (char) (((ch - 'A' + n) % 26) + 'A');
-                sb.append(newChar);
-            } else {
-                char newChar = (char) (((ch - 'a' + n) % 26) + 'a');
-                sb.append(newChar);
+public class Solution {
+    public int[] solution(int[] numbers) {
+        Set<Integer> sumSet = new HashSet<>();
+
+        for (int i = 0; i < numbers.length - 1; i++) {
+            for (int j = i + 1; j < numbers.length; j++) {
+                sumSet.add(numbers[i] + numbers[j]);
             }
         }
-        return sb.toString();
+
+        List<Integer> sortedList = new ArrayList<>(sumSet);
+        Collections.sort(sortedList);
+
+        int[] answer = new int[sortedList.size()];
+        for (int i = 0; i < sortedList.size(); i++) {
+            answer[i] = sortedList.get(i);
+        }
+
+        return answer;
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        String s1 = "AB";
-        int n1 = 1;
-        String result1 = sol.solution(s1, n1);
-        System.out.println(result1);
+        int[] numbers1 = {2, 1, 3, 4, 1};
+        int[] result1 = sol.solution(numbers1);
+        System.out.println(Arrays.toString(result1));
 
-        String s2 = "z";
-        int n2 = 1;
-        String result2 = sol.solution(s2, n2);
-        System.out.println(result2);
-
-        String s3 = "a B z";
-        int n3 = 4;
-        String result3 = sol.solution(s3, n3);
-        System.out.println(result3);
+        int[] numbers2 = {5, 0, 2, 7};
+        int[] result2 = sol.solution(numbers2);
+        System.out.println(Arrays.toString(result2));
     }
 }
