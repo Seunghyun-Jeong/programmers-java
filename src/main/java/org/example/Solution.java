@@ -1,42 +1,34 @@
 package org.example;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
 public class Solution {
-    public int[] solution(int[] numbers) {
-        Set<Integer> sumSet = new HashSet<>();
+    public String solution(int[] food) {
+        StringBuilder builder = new StringBuilder();
 
-        for (int i = 0; i < numbers.length - 1; i++) {
-            for (int j = i + 1; j < numbers.length; j++) {
-                sumSet.add(numbers[i] + numbers[j]);
+        for (int i = 1; i < food.length; i++) {
+            int count = food[i] / 2;
+            for (int j = 0; j < count; j++) {
+                builder.append(i);
             }
         }
 
-        List<Integer> sortedList = new ArrayList<>(sumSet);
-        Collections.sort(sortedList);
+        String player1Food = builder.toString();
+        String result = player1Food + "0";
 
-        int[] answer = new int[sortedList.size()];
-        for (int i = 0; i < sortedList.size(); i++) {
-            answer[i] = sortedList.get(i);
-        }
+        String player2Food = builder.reverse().toString();
+        result += player2Food;
 
-        return answer;
+        return result;
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        int[] numbers1 = {2, 1, 3, 4, 1};
-        int[] result1 = sol.solution(numbers1);
-        System.out.println(Arrays.toString(result1));
+        int[] food1 = {1, 3, 4, 6};
+        String result1 = sol.solution(food1);
+        System.out.println(result1);
 
-        int[] numbers2 = {5, 0, 2, 7};
-        int[] result2 = sol.solution(numbers2);
-        System.out.println(Arrays.toString(result2));
+        int[] food2 = {1, 7, 1, 2};
+        String result2 = sol.solution(food2);
+        System.out.println(result2);
     }
 }
