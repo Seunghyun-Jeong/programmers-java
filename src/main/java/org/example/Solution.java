@@ -1,34 +1,33 @@
 package org.example;
 
 public class Solution {
-    public String solution(int[] food) {
-        StringBuilder builder = new StringBuilder();
+    public int solution(String s) {
+        String[] words = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
 
-        for (int i = 1; i < food.length; i++) {
-            int count = food[i] / 2;
-            for (int j = 0; j < count; j++) {
-                builder.append(i);
-            }
+        for (int i = 0; i < words.length; i++) {
+            s = s.replace(words[i], String.valueOf(i));
         }
 
-        String player1Food = builder.toString();
-        String result = player1Food + "0";
-
-        String player2Food = builder.reverse().toString();
-        result += player2Food;
-
-        return result;
+        return Integer.parseInt(s);
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        int[] food1 = {1, 3, 4, 6};
-        String result1 = sol.solution(food1);
+        String s1 = "one4seveneight";
+        int result1 = sol.solution(s1);
         System.out.println(result1);
 
-        int[] food2 = {1, 7, 1, 2};
-        String result2 = sol.solution(food2);
+        String s2 = "23four5six7";
+        int result2 = sol.solution(s2);
         System.out.println(result2);
+
+        String s3 = "2three45sixseven";
+        int result3 = sol.solution(s3);
+        System.out.println(result3);
+
+        String s4 = "123";
+        int result4 = sol.solution(s4);
+        System.out.println(result4);
     }
 }
