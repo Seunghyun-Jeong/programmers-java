@@ -1,33 +1,32 @@
 package org.example;
 
-public class Solution {
-    public int solution(String s) {
-        String[] words = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+import java.util.Arrays;
 
-        for (int i = 0; i < words.length; i++) {
-            s = s.replace(words[i], String.valueOf(i));
+public class Solution {
+    public int[] solution(int[] array, int[][] commands) {
+        int[] answer = new int[commands.length];
+
+        for (int c = 0; c < commands.length; c++) {
+            int i = commands[c][0];
+            int j = commands[c][1];
+            int k = commands[c][2];
+
+            int[] tempArray = Arrays.copyOfRange(array, i - 1, j);
+
+            Arrays.sort(tempArray);
+
+            answer[c] = tempArray[k - 1];
         }
 
-        return Integer.parseInt(s);
+        return answer;
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        String s1 = "one4seveneight";
-        int result1 = sol.solution(s1);
-        System.out.println(result1);
-
-        String s2 = "23four5six7";
-        int result2 = sol.solution(s2);
-        System.out.println(result2);
-
-        String s3 = "2three45sixseven";
-        int result3 = sol.solution(s3);
-        System.out.println(result3);
-
-        String s4 = "123";
-        int result4 = sol.solution(s4);
-        System.out.println(result4);
+        int[] array1 = {1, 5, 2, 6, 3, 7, 4};
+        int[][] commands1 = {{2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
+        int[] result1 = sol.solution(array1, commands1);
+        System.out.println(Arrays.toString(result1));
     }
 }
