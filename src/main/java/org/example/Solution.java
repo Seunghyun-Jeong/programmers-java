@@ -1,32 +1,27 @@
 package org.example;
 
-import java.util.Arrays;
-
 public class Solution {
-    public int[] solution(int[] array, int[][] commands) {
-        int[] answer = new int[commands.length];
+    public int solution(int a, int b, int n) {
+        int totalCola = 0;
 
-        for (int c = 0; c < commands.length; c++) {
-            int i = commands[c][0];
-            int j = commands[c][1];
-            int k = commands[c][2];
-
-            int[] tempArray = Arrays.copyOfRange(array, i - 1, j);
-
-            Arrays.sort(tempArray);
-
-            answer[c] = tempArray[k - 1];
+        while (n >= a) {
+            int newCola = (n / a) * b;
+            totalCola += newCola;
+            n = (n % a) + newCola;
         }
 
-        return answer;
+        return totalCola;
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        int[] array1 = {1, 5, 2, 6, 3, 7, 4};
-        int[][] commands1 = {{2, 5, 3}, {4, 4, 1}, {1, 7, 3}};
-        int[] result1 = sol.solution(array1, commands1);
-        System.out.println(Arrays.toString(result1));
+        int a1 = 2, b1 = 1, n1 = 20;
+        int result1 = sol.solution(a1, b1, n1);
+        System.out.println(result1);
+
+        int a2 = 3, b2 = 1, n2 = 20;
+        int result2 = sol.solution(a2, b2, n2);
+        System.out.println(result2);
     }
 }
