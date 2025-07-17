@@ -1,27 +1,38 @@
 package org.example;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class Solution {
-    public int solution(int a, int b, int n) {
-        int totalCola = 0;
+    public String[] solution(String[] strings, int n) {
+        Arrays.sort(strings, new Comparator<String>() {
+            @Override
+            public int compare(String s1, String s2) {
+                char char1 = s1.charAt(n);
+                char char2 = s2.charAt(n);
 
-        while (n >= a) {
-            int newCola = (n / a) * b;
-            totalCola += newCola;
-            n = (n % a) + newCola;
-        }
+                if (char1 == char2) {
+                    return s1.compareTo(s2);
+                } else {
+                    return Character.compare(char1, char2);
+                }
+            }
+        });
 
-        return totalCola;
+        return strings;
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        int a1 = 2, b1 = 1, n1 = 20;
-        int result1 = sol.solution(a1, b1, n1);
-        System.out.println(result1);
+        String[] strings1 = {"sun", "bed", "car"};
+        int n1 = 1;
+        String[] result1 = sol.solution(strings1, n1);
+        System.out.println(Arrays.toString(result1));
 
-        int a2 = 3, b2 = 1, n2 = 20;
-        int result2 = sol.solution(a2, b2, n2);
-        System.out.println(result2);
+        String[] strings2 = {"abce", "abcd", "cdx"};
+        int n2 = 2;
+        String[] result2 = sol.solution(strings2, n2);
+        System.out.println(Arrays.toString(result2));
     }
 }
