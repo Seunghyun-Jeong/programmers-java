@@ -1,38 +1,41 @@
 package org.example;
 
 import java.util.Arrays;
-import java.util.Comparator;
+import java.util.PriorityQueue;
 
 public class Solution {
-    public String[] solution(String[] strings, int n) {
-        Arrays.sort(strings, new Comparator<String>() {
-            @Override
-            public int compare(String s1, String s2) {
-                char char1 = s1.charAt(n);
-                char char2 = s2.charAt(n);
+    public int[] solution(int k, int[] score) {
+        int[] answer = new int[score.length];
 
-                if (char1 == char2) {
-                    return s1.compareTo(s2);
-                } else {
-                    return Character.compare(char1, char2);
+        PriorityQueue<Integer> hallOfFame = new PriorityQueue<>();
+
+        for (int i = 0; i < score.length; i++) {
+            if (hallOfFame.size() < k) {
+                hallOfFame.add(score[i]);
+            } else {
+                if (score[i] > hallOfFame.peek()) {
+                    hallOfFame.poll();
+                    hallOfFame.add(score[i]);
                 }
             }
-        });
 
-        return strings;
+            answer[i] = hallOfFame.peek();
+        }
+
+        return answer;
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        String[] strings1 = {"sun", "bed", "car"};
-        int n1 = 1;
-        String[] result1 = sol.solution(strings1, n1);
+        int k1 = 3;
+        int[] score1 = {10, 100, 20, 150, 1, 100, 200};
+        int[] result1 = sol.solution(k1, score1);
         System.out.println(Arrays.toString(result1));
 
-        String[] strings2 = {"abce", "abcd", "cdx"};
-        int n2 = 2;
-        String[] result2 = sol.solution(strings2, n2);
+        int k2 = 4;
+        int[] score2 = {0, 300, 40, 300, 20, 70, 150, 50, 500, 1000};
+        int[] result2 = sol.solution(k2, score2);
         System.out.println(Arrays.toString(result2));
     }
 }
