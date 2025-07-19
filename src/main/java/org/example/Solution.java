@@ -4,38 +4,35 @@ import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class Solution {
-    public int[] solution(int k, int[] score) {
-        int[] answer = new int[score.length];
+    public String solution(String[] cards1, String[] cards2, String[] goal) {
+        int i = 0, j = 0;
 
-        PriorityQueue<Integer> hallOfFame = new PriorityQueue<>();
-
-        for (int i = 0; i < score.length; i++) {
-            if (hallOfFame.size() < k) {
-                hallOfFame.add(score[i]);
+        for (String word : goal) {
+            if (i < cards1.length && cards1[i].equals(word)) {
+                i++;
+            } else if (j < cards2.length && cards2[j].equals(word)) {
+                j++;
             } else {
-                if (score[i] > hallOfFame.peek()) {
-                    hallOfFame.poll();
-                    hallOfFame.add(score[i]);
-                }
+                return "No";
             }
-
-            answer[i] = hallOfFame.peek();
         }
 
-        return answer;
+        return "Yes";
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        int k1 = 3;
-        int[] score1 = {10, 100, 20, 150, 1, 100, 200};
-        int[] result1 = sol.solution(k1, score1);
-        System.out.println(Arrays.toString(result1));
+        String[] cards1 = {"i", "drink", "water"};
+        String[] cards2 = {"want", "to"};
+        String[] goal = {"i", "want", "to", "drink", "water"};
 
-        int k2 = 4;
-        int[] score2 = {0, 300, 40, 300, 20, 70, 150, 50, 500, 1000};
-        int[] result2 = sol.solution(k2, score2);
-        System.out.println(Arrays.toString(result2));
+        System.out.println(sol.solution(cards1, cards2, goal));
+
+        String[] cards1_2 = {"i", "water", "drink"};
+        String[] cards2_2 = {"want", "to"};
+        String[] goal_2 = {"i", "want", "to", "drink", "water"};
+
+        System.out.println(sol.solution(cards1_2, cards2_2, goal_2));
     }
 }
