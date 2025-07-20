@@ -1,38 +1,63 @@
 package org.example;
 
-import java.util.Arrays;
-import java.util.PriorityQueue;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Solution {
-    public String solution(String[] cards1, String[] cards2, String[] goal) {
-        int i = 0, j = 0;
+    public List<Integer> solution(String[] name, int[] yearning, String[][] photo) {
+        Map<String, Integer> score = new HashMap<>();
 
-        for (String word : goal) {
-            if (i < cards1.length && cards1[i].equals(word)) {
-                i++;
-            } else if (j < cards2.length && cards2[j].equals(word)) {
-                j++;
-            } else {
-                return "No";
-            }
+        for (int i = 0; i < name.length; i++) {
+            score.put(name[i], yearning[i]);
         }
 
-        return "Yes";
+        List<Integer> result = new ArrayList<>();
+
+        for (String[] p : photo) {
+            int totalScore = 0;
+
+            for (String person : p) {
+                if (score.containsKey(person)) {
+                    totalScore += score.get(person);
+                }
+            }
+
+            result.add(totalScore);
+        }
+
+        return result;
     }
 
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        String[] cards1 = {"i", "drink", "water"};
-        String[] cards2 = {"want", "to"};
-        String[] goal = {"i", "want", "to", "drink", "water"};
+        String[] name1 = {"may", "kein", "kain", "radi"};
+        int[] yearning1 = {5, 10, 1, 3};
+        String[][] photo1 = {
+                {"may", "kein", "kain", "radi"},
+                {"may", "kein", "brin", "deny"},
+                {"kon", "kain", "may", "coni"}
+        };
+        System.out.println(sol.solution(name1, yearning1, photo1));
 
-        System.out.println(sol.solution(cards1, cards2, goal));
+        String[] name2 = {"kali", "mari", "don"};
+        int[] yearning2 = {11, 1, 55};
+        String[][] photo2 = {
+                {"kali", "mari", "don"},
+                {"pony", "tom", "teddy"},
+                {"con", "mona", "don"}
+        };
+        System.out.println(sol.solution(name2, yearning2, photo2));
 
-        String[] cards1_2 = {"i", "water", "drink"};
-        String[] cards2_2 = {"want", "to"};
-        String[] goal_2 = {"i", "want", "to", "drink", "water"};
-
-        System.out.println(sol.solution(cards1_2, cards2_2, goal_2));
+        String[] name3 = {"may", "kein", "kain", "radi"};
+        int[] yearning3 = {5, 10, 1, 3};
+        String[][] photo3 = {
+                {"may"},
+                {"kein", "deny", "may"},
+                {"kon", "coni"}
+        };
+        System.out.println(sol.solution(name3, yearning3, photo3));
     }
 }
