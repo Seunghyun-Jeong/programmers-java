@@ -1,30 +1,31 @@
 package org.example;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class Solution {
-    public List<Integer> solution(String[] name, int[] yearning, String[][] photo) {
-        Map<String, Integer> score = new HashMap<>();
+    public int solution(int number, int limit, int power) {
+        List<Integer> count = new ArrayList<>();
+        int result = 0;
 
-        for (int i = 0; i < name.length; i++) {
-            score.put(name[i], yearning[i]);
-        }
+        for (int i = 1; i <= number; i++) {
+            int m = 0;
 
-        List<Integer> result = new ArrayList<>();
+            for (int j = 1; j * j <= i; j++) {
+                if (i % j == 0) {
+                    m++;
 
-        for (String[] p : photo) {
-            int totalScore = 0;
-
-            for (String person : p) {
-                if (score.containsKey(person)) {
-                    totalScore += score.get(person);
+                    if (j != i / j) {
+                        m++;
+                    }
                 }
             }
 
-            result.add(totalScore);
+            if (m > limit) {
+                result += power;
+            } else {
+                result += m;
+            }
         }
 
         return result;
@@ -33,31 +34,8 @@ public class Solution {
     public static void main(String[] args) {
         Solution sol = new Solution();
 
-        String[] name1 = {"may", "kein", "kain", "radi"};
-        int[] yearning1 = {5, 10, 1, 3};
-        String[][] photo1 = {
-                {"may", "kein", "kain", "radi"},
-                {"may", "kein", "brin", "deny"},
-                {"kon", "kain", "may", "coni"}
-        };
-        System.out.println(sol.solution(name1, yearning1, photo1));
+        System.out.println(sol.solution(5, 3, 2));
 
-        String[] name2 = {"kali", "mari", "don"};
-        int[] yearning2 = {11, 1, 55};
-        String[][] photo2 = {
-                {"kali", "mari", "don"},
-                {"pony", "tom", "teddy"},
-                {"con", "mona", "don"}
-        };
-        System.out.println(sol.solution(name2, yearning2, photo2));
-
-        String[] name3 = {"may", "kein", "kain", "radi"};
-        int[] yearning3 = {5, 10, 1, 3};
-        String[][] photo3 = {
-                {"may"},
-                {"kein", "deny", "may"},
-                {"kon", "coni"}
-        };
-        System.out.println(sol.solution(name3, yearning3, photo3));
+        System.out.println(sol.solution(10, 3, 2));
     }
 }
